@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Linear Regression</h1>
+    <form action="/result" method="POST">
+        <label for="a">Slope (a):</label>
+        <input type="number" name="a" step="any" required><br>
+        <label for="b">Intercept (b):</label>
+        <input type="number" name="b" step="any" required><br>
+        <label for="num_points">Number of Data Points:</label>
+        <input type="number" name="num_points" min="1" required><br>
+        <label for="noise">Noise Level:</label>
+        <input type="number" name="noise" step="any" required><br>
+        <button type="submit">Generate Regression</button>
+    </form>
+
+    {% if plot_url %}
+    <h2>Regression Results</h2>
+    <p><strong>Input Slope (a):</strong> {{ a }}</p>
+    <p><strong>Input Intercept (b):</strong> {{ b }}</p>
+    <p><strong>Number of Points:</strong> {{ num_points }}</p>
+    <p><strong>Noise Level:</strong> {{ noise }}</p>
+    <p><strong>Model Slope:</strong> {{ slope }}</p>
+    <p><strong>Model Intercept:</strong> {{ intercept }}</p>
+    <p><strong>R² Score:</strong> {{ r2 }}</p>
+
+    <h3>Plot:</h3>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Regression Plot">
+    {% endif %}
+</body>
+</html>
